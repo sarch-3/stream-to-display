@@ -17,7 +17,7 @@ RUN apt-get update \
 		i965-va-driver \
 		intel-media-va-driver \
 		mesa-va-drivers \
-		mesa-dri-drivers \
+		libgl1-mesa-dri \
 		alsa-utils \
 		ca-certificates \
 	&& rm -rf /var/lib/apt/lists/*
