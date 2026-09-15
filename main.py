@@ -4,15 +4,34 @@ import subprocess
 from src.core.config import settings
 
 
+def build_command() -> list[str]:
+    """Build the command to run mpv with the specified settings."""
+
+    command = ["mpv"]
+
+    command.append("--vo=drm")
+
+    if settings.drm_device:
+        command.append(f"--drm-device={settings.drm_device}")
+
+    if settings.drm_connector:
+        command.append(f"--drm-connector={settings.drm_connector}")
+
+    if settings.audio_output:
+        command.append(f"--ao={settings.audio_output}")
+
+    if settings.audio_device:
+        command.append(f"--audio-device={settings.audio_device}")
+
+    command.append(f"--loop={settings.loop}")
+
+    command.append(settings.stream_url)
+
+    return command
+
+
 def main() -> None:
-    command = [
-        "mpv",
-        settings.stream_url,
-        "--vo=drm",
-        "--drm-device=/dev/dri/card1",
-        f"--drm-connector={settings.display_name}",
-        "--loop=inf",
-    ]
+    command = build_command()
 
     process = subprocess.Popen(command)
 

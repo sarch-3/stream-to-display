@@ -1,5 +1,3 @@
-"""Application configuration loaded from environment variables."""
-
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -16,7 +14,11 @@ class Settings(BaseSettings):
     stream_url: str = Field(
         "https://www.w3schools.com/html/mov_bbb.mp4", validation_alias="STREAM_URL"
     )
-    display_name: str = Field("HDMI-A-1", validation_alias="DISPLAY_NAME")
+    drm_device: str | None = Field(None, validation_alias="DRM_DEVICE")
+    drm_connector: str | None = Field(None, validation_alias="DRM_CONNECTOR")
+    audio_output: str | None = Field(None, validation_alias="AUDIO_OUTPUT")
+    audio_device: str | None = Field(None, validation_alias="AUDIO_DEVICE")
+    loop: str = Field("0", validation_alias="LOOP")  # int or 'inf'
     log_level: str = Field("INFO", validation_alias="LOG_LEVEL")
 
 

@@ -7,8 +7,10 @@ WORKDIR /app
 
 RUN apk add --no-cache mpv
 
-COPY . /app
+COPY ./requirements.txt /app
 
 RUN pip install --no-cache-dir --disable-pip-version-check .
+
+COPY . /app
 
 CMD ["python", "main.py"]
