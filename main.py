@@ -17,6 +17,8 @@ def build_command() -> list[str]:
     if settings.drm_connector:
         command.append(f"--drm-connector={settings.drm_connector}")
 
+    command.append("--hwdec=auto")
+
     if settings.audio_output:
         command.append(f"--ao={settings.audio_output}")
 

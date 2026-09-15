@@ -5,7 +5,14 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-RUN apk add --no-cache mpv yt-dlp
+RUN apk add --no-cache \
+	mpv \
+	yt-dlp \
+	libva-intel-driver \
+	intel-media-driver \
+	mesa-va-gallium \
+	mesa-dri-gallium \
+    alsa-utils
 
 COPY ./requirements.txt /app
 

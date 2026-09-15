@@ -30,3 +30,5 @@ docker run --rm \
   -e DISPLAY_NAME=HDMI-A-1 \
   stream-to-display
 ```
+
+Не поддерживается апаратное ускорение nvidia
