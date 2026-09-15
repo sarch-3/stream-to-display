@@ -15,7 +15,9 @@ class Settings(BaseSettings):
     drm_connector: str | None = Field(None, validation_alias="DRM_CONNECTOR")
     audio_output: str | None = Field(None, validation_alias="AUDIO_OUTPUT")
     audio_device: str | None = Field(None, validation_alias="AUDIO_DEVICE")
+    cache: bool = Field(True, validation_alias="CACHE")
     loop: str = Field("0", validation_alias="LOOP")  # int or 'inf'
+    stream_resolution: str = Field("1080", validation_alias="STREAM_RESOLUTION")
     stream_url: str = Field(
         "https://www.w3schools.com/html/mov_bbb.mp4", validation_alias="STREAM_URL"
     )
