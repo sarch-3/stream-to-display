@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# Запускаем mpv в фоне (убираем --no-terminal, чтобы в логах Docker было видно, если он упадет!)
 mpv --no-config \
     --idle=yes \
     --input-ipc-server="$SOCKET_PATH" \
@@ -17,7 +16,6 @@ mpv --no-config \
 MPV_PID=$!
 
 echo "Ждем появления сокета $SOCKET_PATH..."
-# Ждем максимум 5 секунд, проверяя, жив ли процесс mpv
 for i in $(seq 1 50); do
     if [ -S "$SOCKET_PATH" ]; then
         echo "mpv успешно стартовал, сокет готов!"

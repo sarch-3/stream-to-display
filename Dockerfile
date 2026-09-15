@@ -24,8 +24,6 @@ RUN apt-get update \
 
 COPY --from=builder /out/stream-to-display /usr/local/bin/stream-to-display
 
-EXPOSE 8080
-
 USER root
 
 COPY entrypoint.sh /entrypoint.sh

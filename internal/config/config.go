@@ -16,7 +16,7 @@ type Config struct {
 	AudioOutput          string // Cant be changed at runtime
 	AudioDevice          string
 	HWDEC                string
-	Cache                bool
+	Cache                string
 	DemuxerMaxBytes      int
 	DemuxerReadaheadSecs int
 }
@@ -32,7 +32,7 @@ func Load() Config {
 		AudioOutput:          getEnv("AUDIO_OUTPUT", "alsa"),
 		AudioDevice:          getEnv("AUDIO_DEVICE", "default"),
 		HWDEC:                getEnv("HWDEC", "vaapi"),
-		Cache:                getEnvBool("CACHE", true),
+		Cache:                getEnv("CACHE", "yes"),
 		DemuxerMaxBytes:      getEnvInt("DEMUXER_MAX_BYTES", 100*1024),
 		DemuxerReadaheadSecs: getEnvInt("DEMUXER_READAHEAD_SECS", 60),
 		// SeekIntervalSeconds:  getEnvInt("SEEK_INTERVAL_SECONDS", 10),
@@ -57,20 +57,6 @@ func getEnvInt(key string, fallback int) int {
 	}
 
 	parsed, err := strconv.Atoi(value)
-	if err != nil {
-		return fallback
-	}
-
-	return parsed
-}
-
-func getEnvBool(key string, fallback bool) bool {
-	value, ok := os.LookupEnv(key)
-	if !ok || value == "" {
-		return fallback
-	}
-
-	parsed, err := strconv.ParseBool(value)
 	if err != nil {
 		return fallback
 	}
