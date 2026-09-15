@@ -7,6 +7,7 @@ docker build -t stream-to-display .
 ```
 docker run --rm \
   --device=/dev/dri/card1 \
+  --device=/dev/dri/renderD128 \
   --device=/dev/snd:/dev/snd \
   -e DRM_DEVICE=/dev/dri/card1 \
   -e DRM_CONNECTOR=HDMI-A-1 \
