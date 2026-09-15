@@ -31,7 +31,7 @@ def build_command() -> list[str]:
     command.append(f"--loop={settings.loop}")
 
     command.append(
-        f'--ytdl-format="bestvideo[height<=?{settings.stream_resolution}]+bestaudio/best"'
+        f"--ytdl-format=bestvideo[height<=?{settings.stream_resolution}]+bestaudio/best"
     )
 
     # --demuxer-max-bytes=100M
