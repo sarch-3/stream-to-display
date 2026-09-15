@@ -5,7 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-RUN apk add --no-cache mpv
+RUN apk add --no-cache mpv yt-dlp
 
 COPY ./requirements.txt /app
 
