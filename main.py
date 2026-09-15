@@ -34,8 +34,9 @@ def build_command() -> list[str]:
         f"--ytdl-format=bestvideo[height<=?{settings.stream_resolution}]+bestaudio/best"
     )
 
-    # --demuxer-max-bytes=100M
-    # --demuxer-readahead-secs=60
+    command.append("--demuxer-max-bytes=100M")
+
+    command.append("--demuxer-readahead-secs=60")
 
     command.append(settings.stream_url)
 
