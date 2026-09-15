@@ -39,4 +39,6 @@ ENV APP_HOST=0.0.0.0 \
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "sudo mpv --no-config --idle=yes --no-terminal --input-ipc-server=\"$SOCKET_PATH\" --vo=\"$VIDEO_OUTPUT\" --drm-device=\"$DRM_DEVICE\" --drm-connector=\"$DRM_CONNECTOR\" --ao=\"$AUDIO_OUTPUT\" --audio-device=\"$AUDIO_DEVICE\" --hwdec=\"$HWDEC\" --cache=\"$CACHE\" --demuxer-max-bytes=\"$DEMUXER_MAX_BYTES\" --demuxer-readahead-secs=\"$DEMUXER_READAHEAD_SECS\" & exec /usr/local/bin/stream-to-display"]
+USER root
+
+CMD ["sh", "-c", "mpv --no-config --idle=yes --no-terminal --input-ipc-server=\"$SOCKET_PATH\" --vo=\"$VIDEO_OUTPUT\" --drm-device=\"$DRM_DEVICE\" --drm-connector=\"$DRM_CONNECTOR\" --ao=\"$AUDIO_OUTPUT\" --audio-device=\"$AUDIO_DEVICE\" --hwdec=\"$HWDEC\" --cache=\"$CACHE\" --demuxer-max-bytes=\"$DEMUXER_MAX_BYTES\" --demuxer-readahead-secs=\"$DEMUXER_READAHEAD_SECS\" & exec /usr/local/bin/stream-to-display"]

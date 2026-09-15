@@ -12,8 +12,8 @@ docker run --rm \
   -e APP_HOST=0.0.0.0 \
   -e APP_PORT=8080 \
   -e VIDEO_OUTPUT=drm \
-  -e DRM_DEVICE=/dev/dri/card0 \
-  -e DRM_CONNECTOR=HDMI-A-1 \
+  -e DRM_DEVICE=/dev/dri/card1 \
+  -e DRM_CONNECTOR=eDP-1 \
   -e AUDIO_OUTPUT=alsa \
   -e AUDIO_DEVICE=alsa/hw:0,3 \
   -e HWDEC=vaapi \
