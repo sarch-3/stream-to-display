@@ -9,7 +9,7 @@ RUN apk add --no-cache mpv
 
 COPY ./requirements.txt /app
 
-RUN pip install --no-cache-dir --disable-pip-version-check .
+RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt
 
 COPY . /app
 
