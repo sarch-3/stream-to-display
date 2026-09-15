@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     audio_output: str | None = Field(None, validation_alias="AUDIO_OUTPUT")
     audio_device: str | None = Field(None, validation_alias="AUDIO_DEVICE")
     cache: bool = Field(True, validation_alias="CACHE")
+    demuxer_max_bytes: str = Field("100M", validation_alias="DEMUXER_MAX_BYTES")
+    demuxer_readahead_secs: str = Field("60", validation_alias="DEMUXER_READAHEAD_SECS")
     loop: str = Field("0", validation_alias="LOOP")  # int or 'inf'
     stream_resolution: str = Field("1080", validation_alias="STREAM_RESOLUTION")
     stream_url: str = Field(

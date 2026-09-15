@@ -30,15 +30,15 @@ def build_command() -> list[str]:
     else:
         command.append("--cache=no")
 
+    command.append(f"--demuxer-max-bytes={settings.demuxer_max_bytes}")
+
+    command.append(f"--demuxer-readahead-secs={settings.demuxer_readahead_secs}")
+
     command.append(f"--loop={settings.loop}")
 
     command.append(
         f"--ytdl-format=bestvideo[height<=?{settings.stream_resolution}][vcodec^=avc1]+bestaudio/best"
     )
-
-    command.append("--demuxer-max-bytes=100M")
-
-    command.append("--demuxer-readahead-secs=60")
 
     command.append(settings.stream_url)
 
