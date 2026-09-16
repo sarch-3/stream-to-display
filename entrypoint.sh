@@ -12,7 +12,8 @@ mpv --no-config \
     --cache="$CACHE" \
     --demuxer-max-bytes="$DEMUXER_MAX_BYTES" \
     --demuxer-readahead-secs="$DEMUXER_READAHEAD_SECS" \
-    --ytdl-format="$YTDL_FORMAT" \ &
+    --ytdl-format="$YTDL_FORMAT" \
+    --script-opts=ytdl_hook-ytdl_path=/usr/local/bin/yt-dlp &
 
 MPV_PID=$!
 
