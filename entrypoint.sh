@@ -13,7 +13,9 @@ mpv --no-config \
     --demuxer-max-bytes="$DEMUXER_MAX_BYTES" \
     --demuxer-readahead-secs="$DEMUXER_READAHEAD_SECS" \
     --ytdl-format="$YTDL_FORMAT" \
-    --script-opts=ytdl_hook-ytdl_path=/usr/local/bin/yt-dlp &
+    --script-opts=ytdl_hook-ytdl_path=/usr/local/bin/yt-dlp \
+    --ytdl-raw-options=extractor-args="youtube:player_client=android" \
+    --no-sub \ &
 
 MPV_PID=$!
 

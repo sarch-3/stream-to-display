@@ -12,8 +12,7 @@ docker build -t stream-to-display .
 docker run --rm \
 	--env-file .env \
   -p 8080:8080 \
-  --device=/dev/dri/card1 \
-  --device=/dev/dri/renderD128 \
-  --device /dev/snd:/dev/snd \
+  --device=/dev/dri
+  --device=dev/snd \
   stream-to-display
 ```
