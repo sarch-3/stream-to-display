@@ -13,7 +13,7 @@ FROM debian:bookworm-slim
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		mpv \
-		yt-dlp \
+		wget \
 		i965-va-driver \
 		intel-media-va-driver \
 		mesa-va-drivers \
@@ -21,6 +21,10 @@ RUN apt-get update \
 		alsa-utils \
 		ca-certificates \
 	&& rm -rf /var/lib/apt/lists/*
+
+RUN wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp \
+    && chmod a+rx /usr/local/bin/yt-dlp
+
 
 COPY --from=builder /out/stream-to-display /usr/local/bin/stream-to-display
 
