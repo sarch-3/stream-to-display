@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net"
 
 	"github.com/sarch-3/stream-to-display/internal/domain"
@@ -35,7 +34,13 @@ func (s *PlayerService) AddVideo(source string) domain.ActionResponse {
 
 	command := []interface{}{"loadfile", source, "append-play"}
 
-	resp := sendCommand(command, s.socketPath)
+	resp, err := sendCommand(command, s.socketPath)
+	if err != nil {
+		return domain.ActionResponse{
+			Success: false,
+			Message: fmt.Sprintf("mpv IPC error: %v", err),
+		}
+	}
 
 	if resp.Error == "success" {
 		return domain.ActionResponse{
@@ -153,10 +158,10 @@ func (s *PlayerService) AddVideo(source string) domain.ActionResponse {
 // 	return false
 // }
 
-func sendCommand(command []interface{}, socket string) domain.MPVResponse {
+func sendCommand(command []interface{}, socket string) (domain.MPVResponse, error) {
 	conn, err := net.Dial("unix", socket)
 	if err != nil {
-		log.Fatalf("error at connecting to mpv socket: %v", err)
+		return domain.MPVResponse{}, fmt.Errorf("connect: %w", err)
 	}
 	defer conn.Close()
 
@@ -166,26 +171,26 @@ func sendCommand(command []interface{}, socket string) domain.MPVResponse {
 
 	jsonData, err := json.Marshal(req)
 	if err != nil {
-		log.Fatalf("marshaling error: %v", err)
+		return domain.MPVResponse{}, fmt.Errorf("marshal command: %w", err)
 	}
 
 	jsonData = append(jsonData, '\n')
 
 	_, err = conn.Write(jsonData)
 	if err != nil {
-		log.Fatalf("writing error: %v", err)
+		return domain.MPVResponse{}, fmt.Errorf("write command: %w", err)
 	}
 
 	reader := bufio.NewReader(conn)
 	rawResponse, err := reader.ReadString('\n')
 	if err != nil {
-		log.Fatalf("reading error: %v", err)
+		return domain.MPVResponse{}, fmt.Errorf("read response: %w", err)
 	}
 
 	var resp domain.MPVResponse
 	if err := json.Unmarshal([]byte(rawResponse), &resp); err != nil {
-		log.Fatalf("Ошибка парсинга ответа: %v", err)
+		return domain.MPVResponse{}, fmt.Errorf("parse response: %w", err)
 	}
 
-	return resp
+	return resp, nil
 }
