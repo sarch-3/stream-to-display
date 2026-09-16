@@ -11,7 +11,8 @@ mpv --no-config \
     --hwdec="$HWDEC" \
     --cache="$CACHE" \
     --demuxer-max-bytes="$DEMUXER_MAX_BYTES" \
-    --demuxer-readahead-secs="$DEMUXER_READAHEAD_SECS" &
+    --demuxer-readahead-secs="$DEMUXER_READAHEAD_SECS" \
+    --ytdl-format="$YTDL_FORMAT" \ &
 
 MPV_PID=$!
 

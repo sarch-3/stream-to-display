@@ -40,11 +40,11 @@ func (s *PlayerService) AddVideo(source string) domain.ActionResponse {
 	if resp.Error == "success" {
 		return domain.ActionResponse{
 			Success: true,
-			Message: "video added",
+			Message: "video queued",
 		}
 	} else {
 		return domain.ActionResponse{
-			Success: true,
+			Success: false,
 			Message: fmt.Sprintf("mpv returned error: %s", resp.Error),
 		}
 	}
