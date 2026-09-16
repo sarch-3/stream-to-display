@@ -14,6 +14,7 @@ RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		mpv \
 		wget \
+        python3 \
 		i965-va-driver \
 		intel-media-va-driver \
 		mesa-va-drivers \
