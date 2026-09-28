@@ -61,9 +61,9 @@ func (s *PlayerService) Playback(action string) domain.ActionResponse {
 	case "play/pause":
 		command = []interface{}{"cycle", "pause"}
 	case "play":
-		command = []interface{}{"set", "pause", false}
+		command = []interface{}{"set_property", "pause", false}
 	case "pause":
-		command = []interface{}{"set", "pause", true}
+		command = []interface{}{"set_property", "pause", true}
 	default:
 		return domain.ActionResponse{
 			Success: false,
