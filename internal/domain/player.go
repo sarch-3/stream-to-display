@@ -19,6 +19,10 @@ type AddVideoRequest struct {
 	Source string `json:"source"`
 }
 
+type PlaybackRequest struct {
+	Playback string `json:"playback"`
+}
+
 // type SeekRequest struct {
 // 	Seconds int `json:"seconds"`
 // 	Delta   int `json:"delta"`

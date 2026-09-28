@@ -21,6 +21,7 @@ func (h *Handler) InitRoutes() http.Handler {
 
 	mux.HandleFunc("GET /health", h.Health)
 	mux.HandleFunc("POST /api/video/add", h.AddVideo)
+	mux.HandleFunc("POST /api/video/playback", h.Playback)
 	// mux.HandleFunc("POST /api/video/playback", h.Playback)
 	// mux.HandleFunc("POST /api/video/seek", h.Seek)
 	// mux.HandleFunc("POST /api/video/skip", h.Skip)
@@ -43,6 +44,17 @@ func (h *Handler) AddVideo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := h.playerService.AddVideo(req.Source)
+	writeJSON(w, http.StatusOK, res)
+}
+
+func (h *Handler) Playback(w http.ResponseWriter, r *http.Request) {
+	var req domain.PlaybackRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "invalid request body", http.StatusBadRequest)
+		return
+	}
+
+	res := h.playerService.Playback(req.Playback)
 	writeJSON(w, http.StatusOK, res)
 }
 

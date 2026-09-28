@@ -33,7 +33,7 @@ func Load() Config {
 		AudioDevice:          getEnv("AUDIO_DEVICE", "default"),
 		HWDEC:                getEnv("HWDEC", "vaapi"),
 		Cache:                getEnv("CACHE", "yes"),
-		DemuxerMaxBytes:      getEnvInt("DEMUXER_MAX_BYTES", 100*1024),
+		DemuxerMaxBytes:      getEnvInt("DEMUXER_MAX_BYTES", 100*1024*1024),
 		DemuxerReadaheadSecs: getEnvInt("DEMUXER_READAHEAD_SECS", 60),
 		// SeekIntervalSeconds:  getEnvInt("SEEK_INTERVAL_SECONDS", 10),
 	}

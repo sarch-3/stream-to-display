@@ -10,9 +10,9 @@ docker build -t stream-to-display .
 
 ```bash
 docker run --rm \
-	--env-file .env \
+  --env-file .env \
   -p 8080:8080 \
-  --device=/dev/dri
-  --device=dev/snd \
+  --device=/dev/dri \
+  --device=/dev/snd \
   stream-to-display
 ```

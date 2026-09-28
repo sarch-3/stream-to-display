@@ -55,6 +55,43 @@ func (s *PlayerService) AddVideo(source string) domain.ActionResponse {
 	}
 }
 
+func (s *PlayerService) Playback(action string) domain.ActionResponse {
+	var command []interface{}
+	switch action {
+	case "play/pause":
+		command = []interface{}{"cycle", "pause"}
+	case "play":
+		command = []interface{}{"set", "pause", false}
+	case "pause":
+		command = []interface{}{"set", "pause", true}
+	default:
+		return domain.ActionResponse{
+			Success: false,
+			Message: "wrong command",
+		}
+	}
+
+	resp, err := sendCommand(command, s.socketPath)
+	if err != nil {
+		return domain.ActionResponse{
+			Success: false,
+			Message: fmt.Sprintf("mpv IPC error: %v", err),
+		}
+	}
+
+	if resp.Error == "success" {
+		return domain.ActionResponse{
+			Success: true,
+			Message: "state updated",
+		}
+	} else {
+		return domain.ActionResponse{
+			Success: false,
+			Message: fmt.Sprintf("mpv returned error: %s", resp.Error),
+		}
+	}
+}
+
 // func (s *PlayerService) Playback() domain.ActionResponse {
 // 	s.state.IsPlaying = !s.state.IsPlaying
 // 	return domain.ActionResponse{
